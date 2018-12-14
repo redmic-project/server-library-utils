@@ -11,12 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.bedatadriven.jackson.datatype.jts.JtsModule;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.redmic.exception.mediastorage.MSFileNotFoundException;
 import es.redmic.exception.utils.ProcessErrorException;
+import es.redmic.jts4jackson.module.JTSModule;
 import es.redmic.models.es.geojson.common.dto.GeoJSONFeatureCollectionDTO;
 
 @Component
@@ -25,7 +25,7 @@ public class GeoUtils {
 	FeatureJSON fjson = new FeatureJSON();
 
 	ObjectMapper jacksonMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			.registerModule(new JtsModule());
+			.registerModule(new JTSModule());
 
 	private final Logger LOGGER = LoggerFactory.getLogger(GeoUtils.class);
 
