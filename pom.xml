@@ -14,7 +14,7 @@
 	<groupId>es.redmic.lib</groupId>
 	<artifactId>utils</artifactId>
 	<packaging>jar</packaging>
-	<version>0.7.0</version>
+	<version>0.8.0</version>
 	<name>Utils</name>
 	<description>Server utils library</description>
 
@@ -27,8 +27,8 @@
 
 		<!-- REDMIC -->
 		<redmic.jts4jackson.version>0.0.1</redmic.jts4jackson.version>
-		<redmic.models.version>0.7.0</redmic.models.version>
-		<redmic.exceptions.version>0.6.0</redmic.exceptions.version>
+		<redmic.models.version>0.8.0</redmic.models.version>
+		<redmic.exceptions.version>0.7.0</redmic.exceptions.version>
 		<redmic.sitemapgen4j.version>0.6.0</redmic.sitemapgen4j.version>
 
 		<!-- OTHERS -->
