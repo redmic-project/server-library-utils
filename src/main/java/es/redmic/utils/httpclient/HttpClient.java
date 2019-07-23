@@ -60,6 +60,7 @@ public class HttpClient {
 		try {
 			response = restTemplate.exchange(url, HttpMethod.GET, null, templateClass);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		if (response != null && response.getStatusCode().is2xxSuccessful())
