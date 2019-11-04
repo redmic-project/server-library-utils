@@ -21,8 +21,8 @@
 	<properties>
 		<!-- REDMIC -->
 		<redmic.jts4jackson.version>0.0.1</redmic.jts4jackson.version>
-		<redmic.models.version>0.8.0</redmic.models.version>
-		<redmic.exceptions.version>0.7.0</redmic.exceptions.version>
+		<redmic.models.version>0.11.0</redmic.models.version>
+		<redmic.exceptions.version>0.10.0</redmic.exceptions.version>
 		<redmic.sitemapgen4j.version>0.6.0</redmic.sitemapgen4j.version>
 
 		<!-- OTHERS -->
