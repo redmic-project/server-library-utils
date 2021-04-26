@@ -29,7 +29,7 @@
 		<language-detector.version>0.5</language-detector.version>
 		<super-csv.version>2.4.0</super-csv.version>
 		<geotools.version>20.1</geotools.version>
-		<commons-io.version>2.6</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		
 		<powermock.version>1.7.3</powermock.version>
 	</properties>
