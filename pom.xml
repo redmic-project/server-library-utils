@@ -14,33 +14,27 @@
 	<groupId>es.redmic.lib</groupId>
 	<artifactId>utils</artifactId>
 	<packaging>jar</packaging>
-	<version>0.10.0</version>
+	<version>0.10.0-feature-changeJtsVersion</version>
 	<name>Utils</name>
 	<description>Server utils library</description>
 
 	<properties>
 		<!-- REDMIC -->
-		<redmic.jts4jackson.version>0.0.1</redmic.jts4jackson.version>
-		<redmic.models.version>0.11.0</redmic.models.version>
+		<redmic.models.version>0.12.0-feature-refactoring</redmic.models.version>
 		<redmic.exceptions.version>0.10.0</redmic.exceptions.version>
 		<redmic.sitemapgen4j.version>0.6.0</redmic.sitemapgen4j.version>
 
 		<!-- OTHERS -->
+		<jackson-datatype-jts.version>1.0-2.7</jackson-datatype-jts.version>
 		<language-detector.version>0.5</language-detector.version>
 		<super-csv.version>2.4.0</super-csv.version>
 		<geotools.version>20.1</geotools.version>
-		<commons-io.version>2.6</commons-io.version>
-		
-		<powermock.version>1.7.3</powermock.version>
+		<commons-io.version>2.8.0</commons-io.version>
+
+		<powermock.version>2.0.9</powermock.version>
 	</properties>
 	<dependencies>
 		<!-- Redmic -->
-
-		<dependency>
-			<groupId>es.redmic.lib</groupId>
-			<artifactId>jts4jackson</artifactId>
-			<version>${redmic.jts4jackson.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>es.redmic.lib</groupId>
@@ -65,6 +59,13 @@
 		</dependency>
 
 		<!-- Otros -->
+
+		<dependency>
+			<groupId>com.graphhopper.external</groupId>
+			<artifactId>jackson-datatype-jts</artifactId>
+			<version>${jackson-datatype-jts.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -131,7 +132,7 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
-		
+
 		<!-- TEST -->
 		<dependency>
 			<groupId>org.powermock</groupId>
