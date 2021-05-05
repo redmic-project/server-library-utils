@@ -9,9 +9,9 @@ package es.redmic.utils.geo.convert;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,7 +21,6 @@ package es.redmic.utils.geo.convert;
  */
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -31,12 +30,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.bedatadriven.jackson.datatype.jts.JtsModule;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.redmic.exception.mediastorage.MSFileNotFoundException;
 import es.redmic.exception.utils.ProcessErrorException;
-import es.redmic.jts4jackson.module.JTSModule;
 import es.redmic.models.es.geojson.common.dto.GeoJSONFeatureCollectionDTO;
 
 @Component
@@ -45,7 +44,7 @@ public class GeoUtils {
 	FeatureJSON fjson = new FeatureJSON();
 
 	ObjectMapper jacksonMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-			.registerModule(new JTSModule());
+			.registerModule(new JtsModule());
 
 	private final Logger LOGGER = LoggerFactory.getLogger(GeoUtils.class);
 
@@ -60,25 +59,30 @@ public class GeoUtils {
 		String targetFile = folder + "/" + UUID.randomUUID().toString() + ".json";
 
 		String[] cmd = { "bash", "-c",
-				"ogr2ogr --config SHAPE_RESTORE_SHX yes -f \"GeoJSON\" " + targetFile + " " + sourceFile };
+				"ogr2ogr --config SHAPE_RESTORE_SHX yes -f \"GeoJSON\" \"" + targetFile + "\" \"" + sourceFile + "\""};
 
 		Process p;
 		try {
 			ProcessBuilder builder = new ProcessBuilder(cmd);
 			builder.redirectErrorStream(true);
 			p = builder.start();
-			p.waitFor();
+			int exitCode = p.waitFor();
+			LOGGER.debug("Program ended with exitCode {}", exitCode);
 		} catch (IOException | InterruptedException e) {
 
-			LOGGER.debug("Error ejecutando " + cmd[0]);
+			LOGGER.debug("Error ejecutando {}", cmd[0]);
 			throw new ProcessErrorException(e);
 		}
 
 		File geojsonFile = new File(targetFile);
 		GeoJSONFeatureCollectionDTO collection = null;
+
+		if (!geojsonFile.exists()) {
+			return collection;
+		}
 		try {
-			FileInputStream geoJson = new FileInputStream(targetFile);
-			collection = jacksonMapper.readValue(geoJson, GeoJSONFeatureCollectionDTO.class);
+			//FileInputStream geoJson = new FileInputStream(geojsonFile);
+			collection = jacksonMapper.readValue(geojsonFile, GeoJSONFeatureCollectionDTO.class);
 		} catch (IOException e) {
 			throw new MSFileNotFoundException(geojsonFile.getName(), folder, e);
 		}

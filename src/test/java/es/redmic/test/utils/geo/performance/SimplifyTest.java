@@ -9,9 +9,9 @@ package es.redmic.test.utils.geo.performance;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,13 +30,13 @@ import org.junit.Test;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.LineString;
 
+import com.bedatadriven.jackson.datatype.jts.JtsModule;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import es.redmic.jts4jackson.module.JTSModule;
 import es.redmic.models.es.geojson.common.model.Feature;
 import es.redmic.models.es.geojson.common.model.Properties;
 import es.redmic.utils.geo.performance.Simplify;
@@ -50,7 +50,7 @@ public class SimplifyTest {
 	@Before
 	public void init() throws IllegalArgumentException, IllegalAccessException, IOException {
 		objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-		objectMapper.registerModule(new JTSModule());
+		objectMapper.registerModule(new JtsModule());
 
 		InputStream file = getClass().getResource("/data/geo/geojson/" + FILENAME_LINESTRING_GEOJSON).openStream();
 
